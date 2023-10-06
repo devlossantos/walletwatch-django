@@ -1,0 +1,25 @@
+<!--
+    daily savings recommendations (based on the expense history show discounts) - revenue
+    view wallets
+    totals
+    last 3 expenses
+    top categories
+    rule of 50-30-20
+-->
+
+{% extends "base.html" %}
+<title>{% block title %}WalletWatch - Home{% endblock %}</title>
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+    <h1>Authenticated!</h1>
+
+{% else %}
+
+{% include "signin.html" %}
+
+{% endif %}
+
+{% endblock %}
