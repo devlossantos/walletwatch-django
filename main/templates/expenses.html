@@ -1,25 +1,360 @@
-<!--
-    url should be /wallet_name/expenses
-    close / open wallet
-    
-    **table**
-    
-    sorting columns
-    filter on left side banner
-    
-    **right side banner**
-    
-    add user
-    delete user
-
-    **main action buttons** 
-
-    add expense
-    update expense date and amount cannot be modified
--->
-
 {% extends "base.html" %}
+<title>{% block title %}Expenses{% endblock %}</title>
 
 {% block content %}
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+
+<style>
+
+  .container-exp {
+    max-height: 800px;
+  }
+
+  .sidebar {
+    background-color: #f4f4f4;
+    padding: 10px;
+  }
+
+</style>
+
+<script defer>
+  $(document).ready(function() {
+    $('#example').DataTable({
+      initComplete: function () {
+        this.api().columns().every(function () {
+          let column = this;
+          let select = document.createElement('select');
+          select.add(new Option(''));
+          column.footer().replaceChildren(select);
+          select.addEventListener('change', function () {
+            var val = DataTable.util.escapeRegex(select.value);
+            column.search(val ? '^' + val + '$' : '', true, false).draw();
+          });
+          column.data().unique().sort().each(function (d, j) {
+            select.add(new Option(d));
+          });
+        });
+      }
+    });
+  });
+</script>
+
+</head>
+<body>
+  <div class="container-exp">
+      <div class="row">
+          <!-- Sidebar for filtering -->
+          <div class="col-md-3 sidebar">
+              <h4>Filter Data</h4>
+              <label for="nameFilter">Name:</label>
+              <input type="text" id="nameFilter" class="form-control">
+              <label for="positionFilter">Position:</label>
+              <input type="text" id="positionFilter" class="form-control">
+              <label for="ageFilter">Age:</label>
+              <input type="number" id="ageFilter" class="form-control">
+              <label for="officeFilter">Office:</label>
+              <input type="text" id="officeFilter" class="form-control">
+          </div>
+
+          <!-- Data table -->
+          <div class="col-md-9">
+            <table id="example" class="table table-striped container-exp">
+              <thead class="table-dark sticky-top">
+                <tr>
+                  <th>Name</th>
+                  <th>Position</th>
+                  <th>Office</th>
+                  <th>Age</th>
+                  <th>Start date</th>
+                  <th>Salary</th>
+                </tr>
+              </thead>
+                <tr>
+                  <td>Tiger Nixon</td>
+                  <td>System Architect</td>
+                  <td>Edinburgh</td>
+                  <td>61</td>
+                  <td>2011-04-25</td>
+                  <td>$320,800</td>
+                </tr>
+                <tr>
+                  <td>Garrett Winters</td>
+                  <td>Accountant</td>
+                  <td>Tokyo</td>
+                  <td>63</td>
+                  <td>2011-07-25</td>
+                  <td>$170,750</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+                <tr>
+                  <td>Ashton Cox</td>
+                  <td>Junior Technical Author</td>
+                  <td>San Francisco</td>
+                  <td>66</td>
+                  <td>2009-01-12</td>
+                  <td>$86,000</td>
+                </tr>
+            </table>
+          </div>
+      </div>
+  </div>
+
+  <script>
+      $(document).ready(function() {
+          var table = $('#example').DataTable();
+
+          // Apply filtering when input values change
+          $('#nameFilter, #positionFilter, #ageFilter, #officeFilter').on('input', function() {
+              table.columns(0).search($('#nameFilter').val()).draw();
+              table.columns(1).search($('#positionFilter').val()).draw();
+              table.columns(2).search($('#officeFilter').val()).draw();
+              table.columns(3).search($('#ageFilter').val()).draw();
+          });
+      });
+  </script>
+</body>
+</html>
 {% endblock %}

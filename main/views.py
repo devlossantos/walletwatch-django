@@ -29,11 +29,8 @@ def signout(request):
 def password_recovery(request):
     return render(request, "password_recovery.html")
 
-def dashboard(request):
-    return render(request, "dashboard.html")
+def add_expense(request):
+    return render(request, "add_expense.html")
 
-def wallets(request):
-    return render(request, "wallets.html")
-
-def settings(request):
-    return render(request, "settings.html")
+def expenses(request):
+    return render(request, "expenses.html")
